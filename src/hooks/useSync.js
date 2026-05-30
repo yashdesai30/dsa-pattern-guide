@@ -20,28 +20,13 @@ export function useSync(done, setDone) {
       let uid = urlParams.get("user");
       
       if (uid) {
-        localStorage.setItem("dsa_user_uuid", uid);
         window.history.replaceState({}, document.title, window.location.pathname);
       } else {
-        uid = localStorage.getItem("dsa_user_uuid");
-      }
-
-      if (!uid) {
         uid = "dsa_" + Math.random().toString(36).substring(2, 10);
-        localStorage.setItem("dsa_user_uuid", uid);
       }
       setUserId(uid);
 
       let initialData = {};
-      try {
-        const stored = localStorage.getItem("dsa-nc150-v2");
-        if (stored) {
-          initialData = JSON.parse(stored);
-          setDone(initialData);
-        }
-      } catch (e) {
-        console.error("Local storage reading error", e);
-      }
 
       try {
         setDbStatus("syncing");
@@ -52,7 +37,6 @@ export function useSync(done, setDone) {
           if (data && data.progress) {
             const merged = { ...initialData, ...data.progress };
             setDone(merged);
-            localStorage.setItem("dsa-nc150-v2", JSON.stringify(merged));
             setDbStatus("synced");
           } else {
             setDbStatus("synced");
@@ -113,7 +97,6 @@ export function useSync(done, setDone) {
       }
 
       setUserId(cleanId);
-      localStorage.setItem("dsa_user_uuid", cleanId);
 
       const res = await fetch(`/api/progress`, {
         method: "POST",
@@ -141,7 +124,6 @@ export function useSync(done, setDone) {
     
     setLoading(true);
     setUserId(cleanId);
-    localStorage.setItem("dsa_user_uuid", cleanId);
     
     try {
       setDbStatus("syncing");
@@ -151,12 +133,10 @@ export function useSync(done, setDone) {
         const data = await res.json();
         if (data && data.progress) {
           setDone(data.progress);
-          localStorage.setItem("dsa-nc150-v2", JSON.stringify(data.progress));
           setDbStatus("synced");
           triggerToast(`Successfully linked to '${cleanId}'.`);
         } else {
           setDone({});
-          localStorage.setItem("dsa-nc150-v2", JSON.stringify({}));
           setDbStatus("synced");
           triggerToast(`Connected to a clean custom nickname '${cleanId}'.`);
         }

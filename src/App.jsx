@@ -14,15 +14,13 @@ export default function App() {
   const syncState = useSync(done, setDone);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("dsa_theme_mode") || "dark";
-    setTheme(savedTheme);
-    document.body.className = `theme-${savedTheme}`;
+    // Defaulting to dark theme, no local storage persistence
+    document.body.className = `theme-${theme}`;
   }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === "light" ? "dark" : "light";
     setTheme(nextTheme);
-    localStorage.setItem("dsa_theme_mode", nextTheme);
     document.body.className = `theme-${nextTheme}`;
   };
 
@@ -32,12 +30,6 @@ export default function App() {
     if (!next[key]) delete next[key];
     
     setDone(next);
-    try {
-      localStorage.setItem("dsa-nc150-v2", JSON.stringify(next));
-    } catch (err) {
-      console.error("Local storage writing error", err);
-    }
-
     syncState.syncProgress(next);
   };
 
