@@ -97,11 +97,24 @@ export function useSync(done, setDone) {
     }
 
     setLoading(true);
-    setUserId(cleanId);
-    localStorage.setItem("dsa_user_uuid", cleanId);
 
     try {
       setDbStatus("syncing");
+      
+      const checkRes = await fetch(`/api/progress?userId=${cleanId}`);
+      if (checkRes.ok) {
+        const data = await checkRes.json();
+        if (data && data.progress && Object.keys(data.progress).length > 0) {
+          triggerToast(`Nickname '${cleanId}' is already taken.`);
+          setDbStatus(dbStatus); // revert
+          setLoading(false);
+          return;
+        }
+      }
+
+      setUserId(cleanId);
+      localStorage.setItem("dsa_user_uuid", cleanId);
+
       const res = await fetch(`/api/progress`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
