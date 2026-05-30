@@ -20,9 +20,15 @@ export function useSync(done, setDone) {
       let uid = urlParams.get("user");
       
       if (uid) {
+        localStorage.setItem("dsa_user_uuid", uid);
         window.history.replaceState({}, document.title, window.location.pathname);
       } else {
+        uid = localStorage.getItem("dsa_user_uuid");
+      }
+
+      if (!uid) {
         uid = "dsa_" + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem("dsa_user_uuid", uid);
       }
       setUserId(uid);
 
@@ -97,6 +103,8 @@ export function useSync(done, setDone) {
       }
 
       setUserId(cleanId);
+      localStorage.setItem("dsa_user_uuid", cleanId);
+      window.history.replaceState({}, document.title, window.location.pathname);
 
       const res = await fetch(`/api/progress`, {
         method: "POST",
@@ -124,6 +132,8 @@ export function useSync(done, setDone) {
     
     setLoading(true);
     setUserId(cleanId);
+    localStorage.setItem("dsa_user_uuid", cleanId);
+    window.history.replaceState({}, document.title, window.location.pathname);
     
     try {
       setDbStatus("syncing");
