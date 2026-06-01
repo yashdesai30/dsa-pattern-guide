@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useSync(done, setDone) {
+export function useSync(done, setDone, notes, setNotes) {
   const [userId, setUserId] = useState("");
   const [dbStatus, setDbStatus] = useState("local");
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,20 @@ export function useSync(done, setDone) {
       }
       setUserId(uid);
 
-      let initialData = {};
+      // Load initial offline values
+      let localSolved = {};
+      let localNotes = {};
+      try {
+        const storedSolved = localStorage.getItem("dsa_solved");
+        const storedNotes = localStorage.getItem("dsa_notes");
+        if (storedSolved) localSolved = JSON.parse(storedSolved);
+        if (storedNotes) localNotes = JSON.parse(storedNotes);
+      } catch (e) {
+        console.error("Local storage read failure:", e);
+      }
+
+      setDone(localSolved);
+      setNotes(localNotes);
 
       try {
         setDbStatus("syncing");
@@ -41,8 +54,20 @@ export function useSync(done, setDone) {
         if (res.ok && contentType && contentType.includes("application/json")) {
           const data = await res.json();
           if (data && data.progress) {
-            const merged = { ...initialData, ...data.progress };
-            setDone(merged);
+            // Check for modern structured progress envelope
+            if (data.progress.solved && data.progress.notes) {
+              const mergedSolved = { ...localSolved, ...data.progress.solved };
+              const mergedNotes = { ...localNotes, ...data.progress.notes };
+              setDone(mergedSolved);
+              setNotes(mergedNotes);
+              localStorage.setItem("dsa_solved", JSON.stringify(mergedSolved));
+              localStorage.setItem("dsa_notes", JSON.stringify(mergedNotes));
+            } else {
+              // Backward compatibility for old flat format
+              const mergedSolved = { ...localSolved, ...data.progress };
+              setDone(mergedSolved);
+              localStorage.setItem("dsa_solved", JSON.stringify(mergedSolved));
+            }
             setDbStatus("synced");
           } else {
             setDbStatus("synced");
@@ -57,16 +82,20 @@ export function useSync(done, setDone) {
         setLoading(false);
       }
     })();
-  }, [setDone]);
+  }, [setDone, setNotes]);
 
-  const syncProgress = async (nextDone) => {
+  const syncProgress = async (nextDone, nextNotes) => {
+    // Write to offline cache first
+    localStorage.setItem("dsa_solved", JSON.stringify(nextDone));
+    localStorage.setItem("dsa_notes", JSON.stringify(nextNotes));
+
     if (!userId || dbStatus === "local") return;
     try {
       setDbStatus("syncing");
       const res = await fetch(`/api/progress`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, progress: nextDone })
+        body: JSON.stringify({ userId, progress: { solved: nextDone, notes: nextNotes } })
       });
       if (res.ok) {
         setDbStatus("synced");
@@ -94,7 +123,7 @@ export function useSync(done, setDone) {
       const checkRes = await fetch(`/api/progress?userId=${cleanId}`);
       if (checkRes.ok) {
         const data = await checkRes.json();
-        if (data && data.progress && Object.keys(data.progress).length > 0) {
+        if (data && data.progress && (Object.keys(data.progress).length > 0 || (data.progress.solved && Object.keys(data.progress.solved).length > 0))) {
           triggerToast(`Nickname '${cleanId}' is already taken.`);
           setDbStatus(dbStatus); // revert
           setLoading(false);
@@ -109,7 +138,7 @@ export function useSync(done, setDone) {
       const res = await fetch(`/api/progress`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: cleanId, progress: done })
+        body: JSON.stringify({ userId: cleanId, progress: { solved: done, notes } })
       });
       if (res.ok) {
         setDbStatus("synced");
@@ -142,11 +171,25 @@ export function useSync(done, setDone) {
       if (res.ok && contentType && contentType.includes("application/json")) {
         const data = await res.json();
         if (data && data.progress) {
-          setDone(data.progress);
+          if (data.progress.solved && data.progress.notes) {
+            setDone(data.progress.solved);
+            setNotes(data.progress.notes);
+            localStorage.setItem("dsa_solved", JSON.stringify(data.progress.solved));
+            localStorage.setItem("dsa_notes", JSON.stringify(data.progress.notes));
+          } else {
+            // Old flat format compatibility
+            setDone(data.progress);
+            setNotes({});
+            localStorage.setItem("dsa_solved", JSON.stringify(data.progress));
+            localStorage.setItem("dsa_notes", JSON.stringify({}));
+          }
           setDbStatus("synced");
           triggerToast(`Successfully linked to '${cleanId}'.`);
         } else {
           setDone({});
+          setNotes({});
+          localStorage.setItem("dsa_solved", JSON.stringify({}));
+          localStorage.setItem("dsa_notes", JSON.stringify({}));
           setDbStatus("synced");
           triggerToast(`Connected to a clean custom nickname '${cleanId}'.`);
         }

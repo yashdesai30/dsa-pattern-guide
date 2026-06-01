@@ -13,7 +13,8 @@ export default function Layout({
   solvedCount,
   totalProblems,
   pct,
-  syncState
+  syncState,
+  notes
 }) {
   return (
     <div className={`dashboard-layout ${theme}`}>
@@ -23,6 +24,7 @@ export default function Layout({
         solvedCount={solvedCount}
         totalProblems={totalProblems}
         pct={pct}
+        notes={notes}
       />
       <div className="main-content">
         <Header 

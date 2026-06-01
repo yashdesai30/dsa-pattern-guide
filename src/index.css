@@ -408,3 +408,1715 @@ body {
 .active-id { font-size: 11px; color: var(--text-muted); }
 .active-id code { color: var(--primary); font-weight: 700; }
 .premium-toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); padding: 12px 24px; border-radius: 8px; border: var(--glass-border); box-shadow: var(--shadow-lg); z-index: 1000; font-size: 13px; font-weight: 600; color: var(--primary); border-left: 3px solid var(--primary); }
+
+/* ── Notes and Revision Desk Features ── */
+
+/* Sidebar Notes Count Badge */
+.notes-badge-count {
+  margin-left: auto;
+  background: var(--primary);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 2px 6px var(--primary-glow);
+}
+
+/* Problem Row Container & Inline Notes Toggle */
+.problem-row-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.problem-row-container.editor-active {
+  background: rgba(56, 189, 248, 0.02);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.note-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.note-toggle-btn:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+}
+
+.note-toggle-btn.has-note {
+  color: var(--primary);
+  background: var(--primary-glow);
+  border: var(--glass-border);
+}
+
+.note-indicator-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+}
+
+/* Inline Expandable Notes Editor */
+.row-notes-editor {
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.save-status {
+  font-size: 11px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.save-status.saving {
+  color: var(--warning);
+}
+
+.save-status.saved {
+  color: var(--success);
+}
+
+.delete-note-btn-inline {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.delete-note-btn-inline:hover {
+  color: var(--danger);
+  background: rgba(248, 113, 113, 0.1);
+}
+
+.notes-textarea {
+  background: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  padding: 12px;
+  min-height: 100px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.5;
+}
+
+.notes-textarea:focus {
+  border-color: var(--primary);
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.char-count {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-close-editor {
+  background: var(--bg-card-hover);
+  border: var(--glass-border);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-close-editor:hover {
+  background: var(--border-color);
+}
+
+
+/* ── Revision Desk Layout ── */
+.revision-desk {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.revision-desk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.revision-desk-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.revision-desk-header p {
+  color: var(--text-secondary);
+  font-size: 14.5px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon-wrapper {
+  background: linear-gradient(135deg, var(--primary), #818CF8);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+/* Statistics Widgets */
+.revision-stats-mini {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  border-radius: 16px;
+  background: var(--bg-sidebar);
+}
+
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+}
+
+.text-easy { color: var(--easy-color); }
+.text-med { color: var(--med-color); }
+.text-hard { color: var(--hard-color); }
+
+/* Empty Desk View */
+.empty-desk-card {
+  padding: 60px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  margin: 40px auto 0;
+  gap: 16px;
+}
+
+.empty-desk-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--primary-glow);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.empty-desk-card h3 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.empty-desk-card p {
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.btn-primary-large {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px var(--primary-glow);
+  transition: all 0.2s;
+}
+
+.btn-primary-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--primary-glow);
+}
+
+/* Revision Grid and Filters */
+.revision-content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 24px;
+  border-radius: 16px;
+}
+
+.desk-search-container {
+  display: flex;
+  align-items: center;
+  background: var(--bg-app);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 10px;
+  width: 320px;
+  transition: all 0.2s;
+}
+
+.desk-search-container:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.desk-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  margin-left: 8px;
+  color: var(--text-primary);
+  font-size: 13.5px;
+  width: 100%;
+}
+
+/* Notes List and Cards */
+.notes-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.empty-search-card {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.note-card {
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.note-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.note-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.problem-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pattern-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.pattern-badge:hover {
+  opacity: 0.8;
+}
+
+.problem-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.problem-title.completed {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.note-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.diff-badge.diff-easy {
+  background: var(--easy-bg);
+  color: var(--easy-color);
+}
+.diff-badge.diff-medium {
+  background: var(--med-bg);
+  color: var(--med-color);
+}
+.diff-badge.diff-hard {
+  background: var(--hard-bg);
+  color: var(--hard-color);
+}
+
+.delete-note-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-note-btn:hover {
+  color: var(--danger);
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+/* Note Display and Edit Formats */
+.note-content-body {
+  background: var(--bg-app);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  min-height: 80px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.note-text-display {
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-height: 80px;
+}
+
+.note-icon-lead {
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.note-display-paragraph {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+.click-to-edit-hover {
+  position: absolute;
+  inset: 0;
+  background: rgba(56, 189, 248, 0.02);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 8px 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.note-text-display:hover .click-to-edit-hover {
+  opacity: 1;
+}
+
+.click-to-edit-hover span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.note-editing-area {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.note-editor-textarea {
+  background: var(--code-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  padding: 12px;
+  min-height: 120px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.6;
+}
+
+.note-editor-textarea:focus {
+  border-color: var(--primary);
+}
+
+.editor-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: var(--bg-card-hover);
+}
+
+.btn-save {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-save:hover {
+  opacity: 0.9;
+}
+
+.save-status-indicator {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--success);
+  margin-right: auto;
+  align-self: center;
+}
+
+/* Card footer navigation actions */
+.note-card-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.jump-to-pattern-btn {
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+
+.jump-to-pattern-btn:hover {
+  gap: 10px;
+}
+
+/* ── Rich Markdown Editing & Preview System ── */
+
+.editor-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card-hover);
+  padding: 4px;
+  border-radius: 10px;
+  align-self: flex-start;
+  border: var(--glass-border);
+}
+
+.editor-tabs.compact {
+  margin-bottom: 8px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tab-btn.active {
+  background: var(--bg-card);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+  border: var(--glass-border);
+}
+
+.formatting-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-app);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  padding: 6px 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.toolbar-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+}
+
+/* Connect textarea to formatting toolbar */
+.formatting-toolbar + .notes-textarea,
+.formatting-toolbar + .note-editor-textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Premium Markdown Render Container */
+.markdown-preview-container,
+.note-display-markdown {
+  background: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  min-height: 100px;
+  color: var(--text-primary);
+  overflow-x: auto;
+  line-height: 1.7;
+  font-size: 14.5px;
+}
+
+.note-display-markdown {
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: auto;
+  width: 100%;
+}
+
+.markdown-body-rendered {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+}
+
+/* Premium Heading Styles with Left accents */
+.markdown-header {
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 26px;
+  margin-bottom: 12px;
+  line-height: 1.35;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h2.markdown-header {
+  font-size: 19px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-top: 32px;
+}
+
+h3.markdown-header {
+  font-size: 16px;
+  border-left: 3px solid var(--primary);
+  padding-left: 10px;
+}
+
+h4.markdown-header {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+}
+
+h5.markdown-header, h6.markdown-header {
+  font-size: 13.5px;
+  color: var(--text-muted);
+}
+
+.markdown-p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 4px 0;
+}
+
+.markdown-spacing {
+  height: 10px;
+}
+
+.markdown-empty {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+/* Ultra Premium Bullets & Ordered lists */
+.markdown-list {
+  margin: 6px 0 12px 0;
+  padding: 0;
+}
+
+.markdown-list li {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+
+ul.markdown-list {
+  list-style: none;
+}
+
+ul.markdown-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  top: 0;
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+ol.markdown-list {
+  list-style: none;
+  counter-reset: li-counter;
+}
+
+ol.markdown-list li {
+  counter-increment: li-counter;
+  padding-left: 24px;
+}
+
+ol.markdown-list li::before {
+  content: counter(li-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Glowing Inline Code Badges */
+.markdown-inline-code {
+  font-family: var(--font-mono);
+  background: var(--primary-glow);
+  color: var(--primary);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+body.theme-light .markdown-inline-code {
+  background: rgba(79, 70, 229, 0.06);
+  color: var(--primary);
+  border-color: rgba(79, 70, 229, 0.15);
+}
+
+/* ── Spacious Pop-up Modal Editor Overlay ── */
+
+.notes-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 14, 20, 0.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.notes-modal-card {
+  width: 760px;
+  max-width: 92%;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border: var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.notes-modal-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-modal-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notes-modal-subtitle {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.notes-modal-header h3 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.close-modal-btn {
+  background: var(--bg-card-hover);
+  border: var(--glass-border);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-modal-btn:hover {
+  color: var(--danger);
+  background: rgba(248, 113, 113, 0.1);
+  transform: rotate(90deg);
+}
+
+.notes-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notes-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-modal-close {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--primary-glow);
+  transition: all 0.2s;
+}
+
+.btn-modal-close:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Modals sizing customization */
+.modal-textarea {
+  min-height: 380px;
+  flex: 1;
+}
+
+.modal-preview {
+  min-height: 380px;
+  flex: 1;
+}
+
+/* Toolbar Divider & Language Selector Dropdown */
+.toolbar-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border-color);
+  margin: 0 8px;
+}
+
+.language-select {
+  background: var(--bg-card-hover);
+  border: var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  outline: none;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all 0.2s;
+}
+
+.language-select:hover {
+  border-color: var(--primary);
+  background: var(--bg-sidebar);
+}
+
+.language-select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Stateful Code Blocks inside Markdown ── */
+
+.markdown-code-block-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  margin: 20px 0;
+  box-shadow: var(--shadow-lg);
+  background: #0E131F;
+}
+
+.markdown-code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 18px;
+}
+
+.lang-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.btn-copy-code {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-copy-code:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+/* Remove margin/border/bg from pre tag nested in container */
+.markdown-code-block-container .markdown-code-block {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 18px;
+}
+
+.markdown-code-block code {
+  font-family: var(--font-mono);
+  color: #E2E8F0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+/* Light mode overrides for container code block */
+body.theme-light .markdown-code-block-container {
+  background: #F8FAFC;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+body.theme-light .markdown-code-block-header {
+  background: rgba(15, 23, 42, 0.02);
+  border-bottom-color: rgba(15, 23, 42, 0.06);
+}
+
+body.theme-light .btn-copy-code:hover {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+body.theme-light .markdown-code-block code {
+  color: #334155;
+}
+
+/* Animations scale popup */
+.animate-scale-up {
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Premium Rich Text Editor (Notion & Microsoft Loop styled) ── */
+
+.rich-editor-wrapper {
+  background: rgba(15, 23, 42, 0.25);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .rich-editor-wrapper {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+/* Focused editor glow */
+.rich-editor-wrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Quill Toolbar custom premium layout */
+.ql-toolbar.ql-snow {
+  border: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  background: rgba(30, 41, 59, 0.3) !important;
+  padding: 10px 14px !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+body.theme-light .ql-toolbar.ql-snow {
+  background: rgba(241, 245, 249, 0.8) !important;
+}
+
+/* Quill Toolbar buttons and typography adjustments */
+.ql-snow .ql-toolbar button, 
+.ql-snow.ql-toolbar button {
+  width: 28px !important;
+  height: 28px !important;
+  padding: 4px !important;
+  border-radius: 6px !important;
+  color: var(--text-secondary) !important;
+  transition: all 0.15s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar button.ql-active {
+  background: var(--bg-card-hover) !important;
+  color: var(--primary) !important;
+}
+
+.ql-snow .ql-toolbar button svg path,
+.ql-snow.ql-toolbar button svg path,
+.ql-snow .ql-toolbar button svg rect,
+.ql-snow.ql-toolbar button svg rect,
+.ql-snow .ql-toolbar button svg line,
+.ql-snow.ql-toolbar button svg line,
+.ql-snow .ql-toolbar button svg polyline,
+.ql-snow.ql-toolbar button svg polyline {
+  stroke: currentColor !important;
+}
+
+.ql-snow .ql-toolbar button svg polygon,
+.ql-snow.ql-toolbar button svg polygon {
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+.ql-snow .ql-toolbar button.ql-active svg polygon,
+.ql-snow.ql-toolbar button.ql-active svg polygon {
+  fill: currentColor !important;
+}
+
+/* Header picker style */
+.ql-snow .ql-picker {
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s !important;
+}
+
+.ql-snow .ql-picker-label {
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 28px !important;
+}
+
+.ql-snow .ql-picker-label:hover {
+  background: var(--bg-card-hover) !important;
+  color: var(--primary) !important;
+}
+
+.ql-snow .ql-picker-options {
+  background: var(--bg-app) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 6px !important;
+}
+
+.ql-snow .ql-picker-item {
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+  transition: all 0.15s !important;
+}
+
+.ql-snow .ql-picker-item:hover,
+.ql-snow .ql-picker-item.ql-selected {
+  background: var(--bg-card-hover) !important;
+  color: var(--primary) !important;
+}
+
+/* Quill Editor Area */
+.ql-container.ql-snow {
+  border: none !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ql-editor {
+  padding: 20px !important;
+  min-height: 250px;
+  max-height: 480px;
+  overflow-y: auto !important;
+  font-family: var(--font-sans) !important;
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+  color: var(--text-primary) !important;
+}
+
+.ql-editor.ql-blank::before {
+  color: var(--text-muted) !important;
+  font-style: normal !important;
+  left: 20px !important;
+  right: 20px !important;
+  font-size: 14px !important;
+}
+
+/* Notion / Microsoft Loop Snug & Premium Typography Spacing */
+.ql-editor h1, .html-rendered h1,
+.ql-editor h2, .html-rendered h2,
+.ql-editor h3, .html-rendered h3 {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 18px !important;
+  margin-bottom: 6px !important;
+}
+
+.ql-editor h1, .html-rendered h1 { font-size: 22px !important; line-height: 1.3 !important; }
+.ql-editor h2, .html-rendered h2 { font-size: 18px !important; line-height: 1.35 !important; }
+.ql-editor h3, .html-rendered h3 { font-size: 15px !important; line-height: 1.4 !important; }
+
+/* First header inside editor should not have top margin */
+.ql-editor > *:first-child,
+.html-rendered > *:first-child {
+  margin-top: 0 !important;
+}
+
+.ql-editor p, .html-rendered p {
+  margin-bottom: 8px !important;
+  line-height: 1.6 !important;
+}
+
+/* Snug Lists ala Microsoft Loop */
+.ql-editor ul, .html-rendered ul,
+.ql-editor ol, .html-rendered ol {
+  padding-left: 24px !important;
+  margin-top: 4px !important;
+  margin-bottom: 8px !important;
+}
+
+.ql-editor li, .html-rendered li {
+  padding-left: 0 !important;
+  margin-bottom: 4px !important;
+  line-height: 1.5 !important;
+}
+
+/* Compact nested lists */
+.ql-editor ul ul, .ql-editor ul ol, .ql-editor ol ul, .ql-editor ol ol,
+.html-rendered ul ul, .html-rendered ul ol, .html-rendered ol ul, .html-rendered ol ol {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
+
+/* Custom code block styling inside Rich Text */
+.ql-editor pre.ql-syntax,
+.html-rendered pre {
+  background: #0E131F !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px !important;
+  color: #E2E8F0 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  padding: 16px !important;
+  margin: 14px 0 !important;
+  overflow-x: auto !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+body.theme-light .ql-editor pre.ql-syntax,
+body.theme-light .html-rendered pre {
+  background: #0E131F !important; /* Keep dark background in light mode so highlight.js tokens are visible */
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+}
+
+/* Quill 2.0 Code Block Container & Language Picker styling */
+.ql-editor .ql-code-block-container,
+.html-rendered .ql-code-block-container {
+  position: relative;
+  margin: 14px 0 !important;
+  background: #0E131F !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: #E2E8F0 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+}
+
+body.theme-light .ql-editor .ql-code-block-container,
+body.theme-light .html-rendered .ql-code-block-container {
+  background: #0E131F !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Float interactive select dropdown in the editor only */
+.ql-editor .ql-code-block-container select.ql-ui {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  color: #E2E8F0 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 2px 6px !important;
+  outline: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  display: block !important;
+}
+
+.ql-editor .ql-code-block-container select.ql-ui:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--primary) !important;
+}
+
+.ql-editor .ql-code-block-container select.ql-ui option {
+  background: #1E293B !important;
+  color: #F1F5F9 !important;
+}
+
+/* Hide interactive language picker entirely in static cards */
+.html-rendered .ql-code-block-container select.ql-ui,
+.html-rendered .ql-ui {
+  display: none !important;
+}
+
+/* Force absolute monospaced font family alignment on all descendants of code blocks (including highlight.js spans) */
+.ql-editor .ql-code-block-container *,
+.html-rendered .ql-code-block-container *,
+.ql-editor pre.ql-syntax *,
+.html-rendered pre * {
+  font-family: var(--font-mono) !important;
+}
+
+/* Style individual code lines inside the container for both editor and static display */
+.ql-editor .ql-code-block-container .ql-code-block,
+.html-rendered .ql-code-block-container .ql-code-block {
+  font-family: var(--font-mono) !important;
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #E2E8F0 !important;
+  background: transparent !important;
+  white-space: pre-wrap !important; /* Extremely important for preserving python/tabs indentations in static cards! */
+  word-wrap: break-word !important;
+}
+
+.ql-editor code,
+.html-rendered code {
+  font-family: var(--font-mono) !important;
+  font-size: 0.9em !important;
+  background: rgba(56, 189, 248, 0.1) !important;
+  color: var(--primary) !important;
+  padding: 2px 6px !important;
+  border-radius: 6px !important;
+}
+
+body.theme-light .ql-editor code,
+body.theme-light .html-rendered code {
+  background: rgba(79, 70, 229, 0.06) !important;
+}
+
+.ql-editor pre.ql-syntax code,
+.html-rendered pre code,
+.ql-editor .ql-code-block-container code,
+.html-rendered .ql-code-block-container code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: inherit !important;
+}
+
+/* Add custom scrollbar for pre and editor */
+.ql-editor::-webkit-scrollbar,
+.ql-editor pre.ql-syntax::-webkit-scrollbar,
+.html-rendered pre::-webkit-scrollbar,
+.ql-editor .ql-code-block-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ql-editor::-webkit-scrollbar-track,
+.ql-editor pre.ql-syntax::-webkit-scrollbar-track,
+.html-rendered pre::-webkit-scrollbar-track,
+.ql-editor .ql-code-block-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ql-editor::-webkit-scrollbar-thumb,
+.ql-editor pre.ql-syntax::-webkit-scrollbar-thumb,
+.html-rendered pre::-webkit-scrollbar-thumb,
+.ql-editor .ql-code-block-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb:hover,
+.ql-editor pre.ql-syntax::-webkit-scrollbar-thumb:hover,
+.html-rendered pre::-webkit-scrollbar-thumb:hover,
+.ql-editor .ql-code-block-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Premium context-floating Format Code Snippet buttons */
+.ql-editor .ql-code-block-container .btn-format-code-snippet {
+  position: absolute;
+  top: 8px;
+  right: 76px; /* Sits perfectly to the left of the select language picker! */
+  background: rgba(56, 189, 248, 0.12) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  border-radius: 6px !important;
+  color: var(--primary) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  outline: none;
+  cursor: pointer;
+  z-index: 10;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.ql-editor .ql-code-block-container .btn-format-code-snippet:hover {
+  background: rgba(56, 189, 248, 0.25) !important;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.2) !important;
+  transform: translateY(-0.5px);
+  color: #FFFFFF !important;
+}
+
+.ql-editor .ql-code-block-container .btn-format-code-snippet svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Hide in static view */
+.html-rendered .btn-format-code-snippet,
+.html-rendered .ql-code-block-container .btn-format-code-snippet {
+  display: none !important;
+}
+
+/* ── Premium High-Fidelity CSS-based Tooltips ── */
+
+[data-tooltip] {
+  position: relative !important;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 130%; /* Float perfectly BELOW the element to prevent upper boundary clipping */
+  left: 50%;
+  transform: translate(-50%, -4px) scale(0.92);
+  background: rgba(15, 23, 42, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #F1F5F9 !important;
+  font-family: var(--font-sans) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0;
+  z-index: 99999 !important;
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Adjustments for dropdown picker tooltip alignments */
+.ql-picker[data-tooltip]::after {
+  top: 125%;
+}
+
+/* ── Premium Collapsible Inline Note Drawer ── */
+
+.problem-row-inline-note {
+  margin: 10px 16px 16px 16px !important;
+  background: rgba(15, 23, 42, 0.25) !important;
+  border: 1px dashed rgba(56, 189, 248, 0.2) !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.theme-light .problem-row-inline-note {
+  background: rgba(241, 245, 249, 0.5) !important;
+  border-color: rgba(79, 70, 229, 0.2) !important;
+}
+
+.inline-note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.inline-note-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.inline-note-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-note-actions button {
+  background: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.inline-note-actions button:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.inline-note-actions .btn-inline-edit {
+  color: var(--primary) !important;
+  background: var(--primary-glow) !important;
+  border: 1px solid rgba(56, 189, 248, 0.1) !important;
+}
+
+.inline-note-actions .btn-inline-edit:hover {
+  background: rgba(56, 189, 248, 0.25) !important;
+  border-color: var(--primary) !important;
+}
+
+.inline-note-content {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ── Static Card Interactive display inside Revision Desk ── */
+
+.note-text-display-static {
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.15);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+body.theme-light .note-text-display-static {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Dedicated Action Buttons in note card header */
+.note-header-actions .view-note-btn-header,
+.note-header-actions .edit-note-btn-header {
+  background: var(--bg-card-hover);
+  border: var(--glass-border);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 4px;
+}
+
+.note-header-actions .view-note-btn-header:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+  border-color: var(--primary);
+}
+
+.note-header-actions .edit-note-btn-header:hover {
+  color: var(--success);
+  background: rgba(52, 211, 153, 0.15);
+  border-color: var(--success);
+}
+
+/* Spacious Focusing Read Mode Modal styles */
+.spacious-reading-body {
+  padding: 32px 40px !important;
+  overflow-y: auto;
+  font-size: 15.5px !important;
+  line-height: 1.8 !important;
+}
+
+.read-mode-card {
+  max-width: 820px !important;
+  width: 820px !important;
+}
+
+.spacious-reading-body p {
+  margin-bottom: 12px !important;
+}
+
+.spacious-reading-body pre {
+  margin: 20px 0 !important;
+  padding: 20px !important;
+  font-size: 14px !important;
+}

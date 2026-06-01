@@ -3,7 +3,7 @@ import ProblemRow from "./ProblemRow";
 import { PATTERNS } from "../data/patterns";
 import { Lightbulb, Target, ListTodo } from "lucide-react";
 
-export default function PatternDetail({ patternId, done, toggleProblem }) {
+export default function PatternDetail({ patternId, done, toggleProblem, notes = {}, saveNote }) {
   const [difficultyFilter, setDifficultyFilter] = useState("All");
   
   const pattern = PATTERNS.find(p => p.id === patternId);
@@ -88,6 +88,9 @@ export default function PatternDetail({ patternId, done, toggleProblem }) {
                 problem={pr}
                 isDone={!!done[`${pattern.id}::${pr.name}`]}
                 toggleProblem={() => toggleProblem(pattern.id, pr.name)}
+                patternId={pattern.id}
+                notes={notes}
+                saveNote={saveNote}
               />
             ))}
         </div>

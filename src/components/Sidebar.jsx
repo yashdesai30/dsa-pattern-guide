@@ -1,8 +1,10 @@
 import React from "react";
-import { BookOpen, Layers, CheckCircle, BrainCircuit, Activity, Settings, Code, BarChart2 } from "lucide-react";
+import { BookOpen, Layers, CheckCircle, BrainCircuit, Activity, Settings, Code, BarChart2, Notebook } from "lucide-react";
 import { PHASES, PATTERNS } from "../data/patterns";
 
-export default function Sidebar({ activePattern, setActivePattern, solvedCount, totalProblems, pct }) {
+export default function Sidebar({ activePattern, setActivePattern, solvedCount, totalProblems, pct, notes = {} }) {
+  const notesCount = Object.keys(notes).length;
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -20,6 +22,17 @@ export default function Sidebar({ activePattern, setActivePattern, solvedCount, 
           >
             <Activity size={18} />
             <span>Dashboard</span>
+          </button>
+
+          <button 
+            className={`nav-item ${activePattern === "revision-desk" ? "active" : ""}`}
+            onClick={() => setActivePattern("revision-desk")}
+          >
+            <Notebook size={18} />
+            <span>Revision Desk</span>
+            {notesCount > 0 && (
+              <span className="notes-badge-count">{notesCount}</span>
+            )}
           </button>
         </div>
 
