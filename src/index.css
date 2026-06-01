@@ -2120,3 +2120,117 @@ body.theme-light .note-text-display-static {
   padding: 20px !important;
   font-size: 14px !important;
 }
+
+/* ── Active Recall Show/Hide Code Snippets ── */
+
+.ql-code-block-container.code-hidden,
+.markdown-code-block-container.code-hidden {
+  max-height: 48px !important;
+  min-height: 48px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  border: 1px dashed rgba(56, 189, 248, 0.3) !important;
+  background: rgba(15, 23, 42, 0.55) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.theme-light .ql-code-block-container.code-hidden,
+body.theme-light .markdown-code-block-container.code-hidden {
+  background: rgba(241, 245, 249, 0.8) !important;
+  border-color: rgba(79, 70, 229, 0.3) !important;
+}
+
+/* Collapsed Overlay banner content */
+.ql-code-block-container.code-hidden::after,
+.markdown-code-block-container.code-hidden::after {
+  content: "👁️ Reveal Code Snippet";
+  position: absolute;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+  backdrop-filter: blur(2px) !important;
+  color: var(--primary) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  transition: all 0.15s ease !important;
+  pointer-events: none !important;
+}
+
+body.theme-light .ql-code-block-container.code-hidden::after,
+body.theme-light .markdown-code-block-container.code-hidden::after {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.ql-code-block-container.code-hidden:hover::after,
+.markdown-code-block-container.code-hidden:hover::after {
+  background: rgba(15, 23, 42, 0.4) !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 0 10px var(--primary-glow) !important;
+}
+
+body.theme-light .ql-code-block-container.code-hidden:hover::after,
+body.theme-light .markdown-code-block-container.code-hidden:hover::after {
+  background: rgba(255, 255, 255, 0.3) !important;
+  color: var(--primary) !important;
+}
+
+/* Hide all code content when collapsed */
+.ql-code-block-container.code-hidden *,
+.markdown-code-block-container.code-hidden * {
+  display: none !important;
+}
+
+/* Floating Hide Snippet button inside expanded code containers */
+.ql-code-block-container .btn-hide-code-snippet {
+  position: absolute;
+  top: 8px;
+  right: 8px; /* Float on far right */
+  background: rgba(248, 113, 113, 0.12) !important;
+  border: 1px solid rgba(248, 113, 113, 0.25) !important;
+  border-radius: 6px !important;
+  color: var(--danger) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  outline: none;
+  cursor: pointer;
+  z-index: 10;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  transition: all 0.2s;
+}
+
+/* Adjust format button position when hide button is present inside the editor! */
+.ql-editor .ql-code-block-container .btn-format-code-snippet {
+  right: 144px !important; /* Shifts it to the left to avoid overlapping language select & hide button! */
+}
+
+/* Shift select picker to left to fit the hide button */
+.ql-editor .ql-code-block-container select.ql-ui {
+  right: 76px !important;
+}
+
+.ql-code-block-container .btn-hide-code-snippet:hover {
+  background: rgba(248, 113, 113, 0.25) !important;
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.2) !important;
+  transform: translateY(-0.5px);
+  color: #FFFFFF !important;
+}
+
+.ql-code-block-container .btn-hide-code-snippet svg {
+  width: 10px;
+  height: 10px;
+  stroke: currentColor;
+}

@@ -30,6 +30,37 @@ export default function RichEditor({ value, onChange, placeholder }) {
         syntax: {
           hljs: hljs
         },
+        keyboard: {
+          bindings: {
+            // Indent by 4 spaces when Tab is pressed inside a code snippet block
+            tabCodeBlock: {
+              key: "Tab",
+              format: ["code-block"],
+              handler: function(range) {
+                this.quill.insertText(range.index, "    ", "user");
+                this.quill.setSelection(range.index + 4, 0, "user");
+                return false; // Prevent tab browser focus navigation
+              }
+            },
+            // Select all text ONLY inside the active code block when Cmd+A / Ctrl+A is pressed
+            selectAllCodeBlock: {
+              key: "A",
+              shortKey: true,
+              format: ["code-block"],
+              handler: function(range) {
+                const [line] = this.quill.getLine(range.index);
+                if (line && line.parent && line.parent.statics.blotName === "code-block-container") {
+                  const containerBlot = line.parent;
+                  const startIndex = containerBlot.offset(this.quill.scroll);
+                  const length = containerBlot.length();
+                  this.quill.setSelection(startIndex, length - 1, "user");
+                  return false; // Prevent whole-document select all
+                }
+                return true; // Propagate normally outside code blocks
+              }
+            }
+          }
+        },
         toolbar: [
           [{ 'header': [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike'],
